@@ -1,10 +1,11 @@
 import React from 'react';
+import CurrencyFormat from 'react-currency-format';
 import "./Product.css";
 import { useStateValue } from './StateProvider';
 
 function Product({id, title, image, price, rating}) {
     const [{ basket }, dispatch] = useStateValue();
-    console.log("this is basket --->", basket);
+    // console.log("this is basket --->", basket);
     const addToBasket = () => {
         // Dispatch the item into data layer
         dispatch({
@@ -20,7 +21,7 @@ function Product({id, title, image, price, rating}) {
     };
 
     return (
-        <div className='product'>
+        <div className='product'>       
             <div className='product__info'>
                 <p>{title}</p>
                 <div className='product__rating'>
@@ -30,12 +31,35 @@ function Product({id, title, image, price, rating}) {
                             <p>⭐</p>
                     ))}
                 </div>
-                <p className='product__price'>
-                    <small>₹</small>
-                    <strong>{price}</strong>
-                </p>
-            
+
+                {/*  */}
                 
+                <CurrencyFormat 
+                    // renderText is making product value bold
+                    // Know more about it.
+                    renderText={(price) => (
+                        <>
+                            <p className='product__price'>
+                                <strong>{price}</strong>
+                            </p>
+                        </>
+                    )}
+                    // this gives value in normal text(without bolding)
+                    value={price}
+                    decimalScale={2}
+                    thousandSpacing='2s'
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix={"₹"}
+                />
+
+                {/*  */}
+
+                            {/* <p className='product__price'>
+                                <small>₹</small>
+                                <strong>{price}</strong>
+                            </p> */}
+                        
             </div>
             <img src={image}  alt="" />
 

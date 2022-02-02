@@ -33,6 +33,10 @@
     margin-top: 5px;
 }
 
+.product__price > value {
+    font-weight: bold;
+}
+
 .product__info {
     height: 100px;
     margin-bottom: 15px;
